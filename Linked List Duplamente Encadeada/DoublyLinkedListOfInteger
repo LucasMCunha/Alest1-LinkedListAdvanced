@@ -1,0 +1,192 @@
+class DoublyLinkedListOfInteger{
+  
+  private class Node{
+    public int element;
+    public Node next, previous;
+    public Node(int e){
+      element=e;
+      next=null;
+      previous=null;
+    }
+  }
+
+  private Node head, tail;
+  private int count;
+
+  public DoublyLinkedListOfInteger (){
+    count=0;
+    head=null;
+    tail=null;
+  }
+	public void add (int element){
+    // Regra de implementação - adicionado ao final da lista
+    Node newNode = new Node(element);
+
+    if(count==0){
+      head=newNode;
+      tail=newNode;
+    }
+    else{
+      newNode.previous = tail;
+      tail.next = newNode;
+      tail=newNode;
+    }
+
+    count++;
+
+  }
+
+	public void addAt (int index , int element){
+    if(count==0)
+      add(element);
+    else{
+      Node newNode = new Node(element);
+      if(index<=0){
+        // inserir como primeiro element
+        newNode.next = head;
+        head.previous = newNode;
+        head = newNode;
+      }
+      else{
+        if(index>=count){
+          //inserir no final da lista
+          newNode.previous=tail;
+          tail.next=newNode;
+          tail=newNode;          
+        }
+        else{
+          // insere no meio da lista
+          Node aux = head;
+          int myIndex=0;
+          while(myIndex!=index){
+            aux=aux.next;
+            myIndex++;
+          }
+
+          // aux está na posicao a ser inserida
+          newNode.previous = aux.previous;
+          aux.previous=newNode;
+
+          newNode.next = aux;
+          newNode.previous.next=newNode;
+
+        }
+      }
+      count++;
+    }    
+  }
+
+	int get (int index){
+    if(count==0 || index<0 || index>=count)
+      return 0;
+    else{
+      Node aux = head;
+      int myIndex=0;
+      while(myIndex!=index){
+        aux=aux.next;
+        myIndex++;
+      }
+      return aux.element;
+    }
+  }
+
+	int set (int index , int element){
+    if(count==0 || index<0 || index>=count)
+      return 0;
+    else{
+      Node aux = head;
+      int myIndex=0;
+      while(myIndex!=index){
+        aux=aux.next;
+        myIndex++;
+      }
+      int tmp=aux.element;
+      aux.element = element;
+      return tmp;
+    }
+  }
+  
+	boolean remove (int element){
+    Node aux=head;
+    while(aux!=null && aux.element!=element)
+      aux=aux.next;
+
+    if(aux==null)
+      //não encontrei o elemento
+      return false;
+    else{
+      if(aux==head){
+        // é o primeiro elemento
+        if(count==1){
+          head=null;
+          tail=null;
+        }
+        else{
+          head=aux.next;
+          aux.next=null;
+          head.previous=null;
+        }
+        
+      }
+      else if(aux==tail){
+        // é o último elemento a ser removido
+        if(count==1){
+          head=null;
+          tail=null;
+        }
+        else{
+          tail=aux.previous;
+          aux.previous=null;
+          tail.next=null;
+        }
+
+      }
+      else{
+        // algo no meio da lista
+        aux.next.previous=aux.previous;
+        aux.previous.next=aux.next;
+
+        aux.previous=null;
+        aux.next=null
+      }
+      count--;
+      return true;
+    }
+
+    
+
+  }
+
+	//int removeByIndex (int index );
+	boolean isEmpty(){
+    return count==0;
+  }
+	
+  int size(){
+    return count;
+  }
+
+	//boolean contains (int element);
+	//int indexOf (int element);
+	void clear(){
+    head=null;
+    tail=null;
+    count=0;
+  }
+
+  public void status(){
+    Node aux = head;
+    if(count!=0) System.out.print("<--");
+
+    while (aux!=null){
+      System.out.print(aux.element);
+      if(aux.next==null)
+        System.out.println("-->");
+      else
+        System.out.print("<-->");
+      aux=aux.next;
+    }
+
+  }
+
+}

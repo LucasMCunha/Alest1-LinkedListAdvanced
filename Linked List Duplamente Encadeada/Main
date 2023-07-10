@@ -1,0 +1,39 @@
+class Main {
+  public static void main(String[] args) {
+    DoublyLinkedListOfInteger minhaLista = new DoublyLinkedListOfInteger();
+
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    minhaLista.addAt(0,1);
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    minhaLista.addAt(-10,4);
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    minhaLista.addAt(100,7);
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    minhaLista.addAt(1,5);
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    minhaLista.addAt(3,9);
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+
+    System.out.println("resultado do get [2] : "+ minhaLista.get(2));
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+    System.out.println("resultado do set [2] = 3, mas o valor antigo é " + minhaLista.set(2,3) );
+    minhaLista.status();
+    System.out.println("-=-=-=-=-=-=-=-=");
+
+
+  }
+}
